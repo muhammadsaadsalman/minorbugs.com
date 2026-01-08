@@ -31,7 +31,7 @@ const Recent = () => {
     dotsClass: "slick-double-dots",
     customPaging: function (i: number) {
       return (
-        <>
+        <div>
           <div className="dots" title={`${i + 1} of 3`}></div>
           <span
             className="progressBar fs-five"
@@ -40,7 +40,7 @@ const Recent = () => {
             <span className="string"> {i + 1}</span>
             <span className="totalString">3</span>
           </span>
-        </>
+        </div>
       );
     },
     responsive: [

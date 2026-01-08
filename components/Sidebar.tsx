@@ -85,7 +85,7 @@ const Sidebar = ({ sidebar, setSidebar }: sideBarProps) => {
           <div className="bottom-area">
             <Select
               components={{
-                IndicatorSeparator: () => null,
+                 IndicatorSeparator: () => null,
                 DropdownIndicator: () => null,
               }}
               styles={selectStyles}

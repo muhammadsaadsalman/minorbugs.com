@@ -464,6 +464,7 @@
 
 // Banner Section
 .banner-section{
+    min-height: 100vh;
     background-color: var(--n800);
     .banner-content{
         padding: 160px 0;

@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import fav from "@/public/images/fav.png";
-import logo from "@/public/images/logo-text.png";
+import logo from "@/public/images/main/logo-minor-bugs.png";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
@@ -90,36 +90,38 @@ const Header = () => {
         className={`header-section header-menu ${
           headerFixed && "animated fadeInDown header-fixed"
         }`}>
-        <nav className="navbar w-100 flex-nowrap px-2 py-6 ps-2 ps-xl-10 ps-xxl-10 navbar-expand-xl">
-          <div
-            onClick={() => setSidebar(!sidebar)}
-            className="sidebar-close mobile-menu">
-            <button className="d-center d-grid d-xl-none">
-              <i className="material-symbols-outlined mat-icon fs-four">
-                {" "}
-                menu_open{" "}
-              </i>
-              <span className="fs-six">MENU</span>
-            </button>
-          </div>
+        <nav className="navbar w-100 flex-nowrap   ps-xl-10 ps-xxl-10 navbar-expand-xl ">
+
           <Link
             href="/"
-            className="navbar-brand ms-4 ms-xxl-15 d-flex align-items-center gap-2">
-            <Image src={fav} className="logo" alt="logo" />
+            className="navbar-brand d-none d-md-block ps-5  ms-xxl-15 d-flex align-items-center gap-2">
             <Image
               src={logo}
-              className="logo-text d-xxl-block d-none"
+              width={350}
+              height={90}
+              className="logo-text d-xxl-block  "
               alt="logo-text"
+            />
+          </Link>
+          <Link
+              href="/"
+              className="navbar-brand d-md-none  ms-xxl-15 d-flex align-items-center gap-2">
+            <Image
+                src={logo}
+                width={200}
+                height={70}
+                className="logo-text  d-xxl-block  "
+                alt="logo-text"
             />
           </Link>
           <div
             className="collapse navbar-collapse d-flex gap-10 w-100 justify-content-end px-8 pe-2"
             id="navbar-content">
-            <div className="contact-info ms-xl-0 ms-xxl-5 d-none d-sm-flex align-items-center gap-2">
-              <i className="material-symbols-outlined mat-icon"> smartphone </i>
-              <span>(302) 555-0107</span>
-            </div>
-            <ul className="navbar-nav d-xl-flex d-none gap-3 py-4 py-lg-0 m-auto pe-20 align-self-center">
+            {/*<div className="contact-info ms-xl-0 ms-xxl-5 d-none d-sm-flex align-items-center gap-2">*/}
+            {/*  <i className="material-symbols-outlined mat-icon"> smartphone </i>*/}
+            {/*  <span>(302) 555-0107</span>*/}
+            {/*</div>*/}
+            <ul className="navbar-nav d-xl-flex d-none gap-6 py-4 py-lg-0 m-auto pe-20 align-self-center">
               <li className="dropdown show-dropdown">
                 <button
                   type="button"
@@ -333,69 +335,80 @@ const Header = () => {
               </li>
             </ul>
             <div className="right-area position-relative d-flex gap-3 gap-xxl-6 align-items-center">
-              <div className={`single-item ${searchBox && "active"}`}>
-                <div className="cmn-head">
-                  <div
-                    className="icon-area d-center position-relative"
-                    onClick={() => setSearchBox(!searchBox)}>
-                    <i className="material-symbols-outlined mat-icon fs-five">
-                      search
-                    </i>
-                  </div>
-                </div>
-                <div className="main-area p-5">
-                  <h5 className="mb-2">Search</h5>
-                  <form action="#">
-                    <div className="input-area mt-6 p-4 d-flex align-items-center">
-                      <input type="text" placeholder="Enter Your Email" />
-                      <div className="btn-area">
-                        <button className="box-style btn-box border-re py-1 p-2">
-                          Search
-                        </button>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </div>
-              <div className="single-item">
-                <div className="cmn-head">
-                  <div className="icon-area d-center position-relative">
-                    <i className="material-symbols-outlined mat-icon fs-five">
-                      favorite
-                    </i>
-                  </div>
-                </div>
-              </div>
-              <div className="single-item">
-                <div className="cmn-head">
-                  <button
-                    type="button"
-                    className="icon-area d-center position-relative"
-                    data-bs-toggle="modal"
-                    data-bs-target="#loginMod">
-                    <i className="material-symbols-outlined mat-icon fs-five">
-                      person
-                    </i>
-                  </button>
-                </div>
-              </div>
-              <div className={`single-item cart-area ${cart && "active"}`}>
-                <div className="cmn-head">
-                  <button
-                    type="button"
-                    aria-label="Shopping Button"
-                    onClick={() => setCart(!cart)}
-                    className="icon-area d-center position-relative">
-                    <i className="material-symbols-outlined mat-icon fs-five">
-                      shopping_bag
-                    </i>
-                    <span className="position-absolute top-0 end-0 translate-middle badge rounded-pill bg-primary">
-                      {totolProducts}
-                      <span className="visually-hidden">unread messages</span>
-                    </span>
-                  </button>
-                </div>
-                <CartSidebar setCart={setCart} />
+              {/*<div className={`single-item ${searchBox && "active"}`}>*/}
+              {/*  <div className="cmn-head">*/}
+              {/*    <div*/}
+              {/*      className="icon-area d-center position-relative"*/}
+              {/*      onClick={() => setSearchBox(!searchBox)}>*/}
+              {/*      <i className="material-symbols-outlined mat-icon fs-five">*/}
+              {/*        search*/}
+              {/*      </i>*/}
+              {/*    </div>*/}
+              {/*  </div>*/}
+              {/*  <div className="main-area p-5">*/}
+              {/*    <h5 className="mb-2">Search</h5>*/}
+              {/*    <form action="#">*/}
+              {/*      <div className="input-area mt-6 p-4 d-flex align-items-center">*/}
+              {/*        <input type="text" placeholder="Enter Your Email" />*/}
+              {/*        <div className="btn-area">*/}
+              {/*          <button className="box-style btn-box border-re py-1 p-2">*/}
+              {/*            Search*/}
+              {/*          </button>*/}
+              {/*        </div>*/}
+              {/*      </div>*/}
+              {/*    </form>*/}
+              {/*  </div>*/}
+              {/*</div>*/}
+              {/*<div className="single-item">*/}
+              {/*  <div className="cmn-head">*/}
+              {/*    <div className="icon-area d-center position-relative">*/}
+              {/*      <i className="material-symbols-outlined mat-icon fs-five">*/}
+              {/*        favorite*/}
+              {/*      </i>*/}
+              {/*    </div>*/}
+              {/*  </div>*/}
+              {/*</div>*/}
+              {/*<div className="single-item">*/}
+              {/*  <div className="cmn-head">*/}
+              {/*    <button*/}
+              {/*      type="button"*/}
+              {/*      className="icon-area d-center position-relative"*/}
+              {/*      data-bs-toggle="modal"*/}
+              {/*      data-bs-target="#loginMod">*/}
+              {/*      <i className="material-symbols-outlined mat-icon fs-five">*/}
+              {/*        person*/}
+              {/*      </i>*/}
+              {/*    </button>*/}
+              {/*  </div>*/}
+              {/*</div>*/}
+              {/*<div className={`single-item cart-area ${cart && "active"}`}>*/}
+              {/*  <div className="cmn-head">*/}
+              {/*    <button*/}
+              {/*      type="button"*/}
+              {/*      aria-label="Shopping Button"*/}
+              {/*      onClick={() => setCart(!cart)}*/}
+              {/*      className="icon-area d-center position-relative">*/}
+              {/*      <i className="material-symbols-outlined mat-icon fs-five">*/}
+              {/*        shopping_bag*/}
+              {/*      </i>*/}
+              {/*      <span className="position-absolute top-0 end-0 translate-middle badge rounded-pill bg-primary">*/}
+              {/*        {totolProducts}*/}
+              {/*        <span className="visually-hidden">unread messages</span>*/}
+              {/*      </span>*/}
+              {/*    </button>*/}
+              {/*  </div>*/}
+              {/*  <CartSidebar setCart={setCart} />*/}
+              {/*</div>*/}
+              <div
+                onClick={() => setSidebar(!sidebar)}
+                className="sidebar-close mobile-menu">
+                <button className="d-center d-grid d-xl-none">
+                  <i className="material-symbols-outlined mat-icon fs-four">
+                    {" "}
+                    menu_open{" "}
+                  </i>
+                  <span className="fs-six">MENU</span>
+                </button>
               </div>
             </div>
           </div>

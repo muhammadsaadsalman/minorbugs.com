@@ -23,11 +23,11 @@ const Gallery = () => {
     dotsClass: "section-dots",
     customPaging: function (i: number) {
       return (
-        <>
+        <div>
           <span className="dot" role="button" title={`${i + 1} of 5`}>
             <span className="string">{`${i + 1} / 5 `}</span>
           </span>
-        </>
+        </div>
       );
     },
     responsive: [

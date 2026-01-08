@@ -5,6 +5,7 @@ import "material-symbols";
 // import { useEffect } from "react";
 import { Providers } from "@/redux/provider";
 import { Metadata } from "next";
+import {LayoutWrapper} from "@/components/LayoutWrapper";
 // import "bootstrap/dist/css/bootstrap.css";
 
 // import AnimatedCursor from "react-animated-cursor";
@@ -14,7 +15,7 @@ import { Metadata } from "next";
 //   ssr: false,
 // });
 
-const siteTitle = "A Gaming Studio | Minor Bugs";
+const siteTitle = "Minor Bugs";
 const siteDescription =
   "Partner with a gaming studio that creates immersive games, interactive experiences, AR/VR worlds, and innovative gameplay systems, all designed to drive real growth and engage players worldwide";
 
@@ -57,7 +58,11 @@ export default function RootLayout({
         {/*    zIndex: 99999,*/}
         {/*  }}*/}
         {/*/>*/}
-        <Providers>{children}</Providers>
+        <Providers>
+          <LayoutWrapper>
+            {children}
+          </LayoutWrapper>
+         </Providers>
       </body>
     </html>
   );

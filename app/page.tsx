@@ -17,7 +17,6 @@ export default function Home() {
   return (
     <>
       {/* <!-- Sidebar Menu end --> */}
-      <Header />
       {/* <!-- Banner-section start --> */}
       <Banner />
       {/* <!-- Banner-section end --> */}
@@ -62,7 +61,6 @@ export default function Home() {
       <Contact />
       {/* <!-- Contact Us end --> */}
 
-      <Footer />
     </>
   );
 }
