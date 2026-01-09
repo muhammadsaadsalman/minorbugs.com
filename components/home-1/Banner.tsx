@@ -110,9 +110,9 @@ const Banner = () => {
                               <h3>{game.title}</h3>
                             </div>
                             <div className="app-download justify-content-center   d-flex gap-5 align-items-center">
-                              <Link href={game.appStoreLink}>
-                                <Image width={180} height={56}  src={appStoreImage} alt="App Store" />
-                              </Link>
+                              { game?.appStoreLink && <Link href={game?.appStoreLink}>
+                                <Image width={180} height={56} src={appStoreImage} alt="App Store"/>
+                              </Link>}
                               <Link href={game.googlePlayLink}>
                                 <Image width={180} height={56}  src={googlePlayImage} alt="Google Play" />
                               </Link>
@@ -123,6 +123,7 @@ const Banner = () => {
                   ))}
                 </Slider>
               </div>
+
             </div>
           </div>
         </div>

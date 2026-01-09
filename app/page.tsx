@@ -8,7 +8,7 @@ import Contact from "@/components/home-1/Contact";
 import Counter from "@/components/home-1/Counter";
 import JobOpens from "@/components/home-1/JobOpens";
 import LifeGameStorm from "@/components/home-1/LifeGameStorm";
-import OurGames from "@/components/home-1/OurGames";
+import OurGames from "@/components/home-2/OurGames";
 import Services from "@/components/home-1/Services";
 import Team from "@/components/home-1/Team";
 import Testimonials from "@/components/home-1/Testimonials";
@@ -42,11 +42,11 @@ export default function Home() {
       {/* <!-- Our Services end --> */}
 
       {/* <!-- Life Gamestorm start --> */}
-      <LifeGameStorm />
+      {/*<LifeGameStorm />*/}
       {/* <!-- Life Gamestorm end --> */}
 
       {/* <!-- Job Opens start --> */}
-      <JobOpens />
+      {/*<JobOpens />*/}
       {/* <!-- Job Opens end --> */}
 
       {/* <!-- testimonials start --> */}

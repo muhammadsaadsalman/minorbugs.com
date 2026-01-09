@@ -1,429 +1,201 @@
 "use client";
 import Link from "next/link";
-import fav from "@/public/images/fav.png";
 import logo from "@/public/images/main/logo-minor-bugs.png";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { useAppSelector } from "@/redux/hooks";
-import CartSidebar from "./CartSidebar";
-import Sidebar from "./Sidebar";
+import { NavItemProps, NavItems, SubMenuItem } from "@/public/data/home.data";
+import PrimaryBtn from "@/components/PrimaryBtn";
 import LoginModal from "./LoginModal";
 
-const Header = () => {
-  const [sidebar, setSidebar] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const [headerFixed, setHeaderFixed] = useState(false);
-  const [searchBox, setSearchBox] = useState(false);
-  const [cart, setCart] = useState(false);
+interface HeaderProps {
+    sidebar: boolean;
+    setSidebar: (open: boolean) => void;
+}
 
-  const cartItems = useAppSelector((state) => state.cart);
-  const totolProducts = cartItems.products.reduce(
-    (acc, product) => acc + product.quantity!,
-    0
-  );
+const Header = ({ sidebar, setSidebar }: HeaderProps) => {
+    const [scrolled, setScrolled] = useState(false);
+    const [headerFixed, setHeaderFixed] = useState(false);
 
-  useEffect(() => {
-    document.addEventListener("scroll", function () {
-      if (window.scrollY > 600) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-      if (window.scrollY > 50) {
-        setHeaderFixed(true);
-      } else {
-        setHeaderFixed(false);
-        0;
-      }
-    });
-  }, [scrolled]);
-  const scrollToTop = () => {
-    window.scrollTo(0, 0);
-  };
-  const path = usePathname();
-  const homepage = path === "/" || path === "/index-2" || path === "/index-3";
-  const ourServices =
-    path === "/our-services-1" ||
-    path === "/our-services-2" ||
-    path === "/our-services-3" ||
-    path === "/our-services-details" ||
-    path === "/our-services-details-2";
-  const pages =
-    path == "/pricing-plan" ||
-    path == "/store" ||
-    path == "/shop-details-1" ||
-    path == "/shop-details-2" ||
-    path == "/cart" ||
-    path == "/checkout" ||
-    path == "/career" ||
-    path == "/career-details" ||
-    path == "/privacy-policy" ||
-    path == "/terms-condition";
-  return (
-    <>
-      {/* <div className="preloader align-items-center justify-content-center">
-        <span className="loader"></span>
-      </div> */}
-      {/* <!-- end preloader --> */}
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 600) {
+                setScrolled(true);
+            } else {
+                setScrolled(false);
+            }
+            if (window.scrollY > 50) {
+                setHeaderFixed(true);
+            } else {
+                setHeaderFixed(false);
+            }
+        };
 
-      {/* <!-- Scroll To Top Start--> */}
-      <button
-        onClick={scrollToTop}
-        className={`scrollToTop d-none d-md-flex d-center ${
-          scrolled && "active"
-        }`}
-        aria-label="scroll Bar Button">
-        Back To Top
-      </button>
-      {/* <!-- Scroll To Top End --> */}
+        document.addEventListener("scroll", handleScroll);
+        return () => document.removeEventListener("scroll", handleScroll);
+    }, []);
 
-      {/* <!-- Start Custom Cursor --> */}
-      <div className="mouse-follower">
-        <span className="cursor-outline"></span>
-        <span className="cursor-dot"></span>
-      </div>
-      {/* <!-- End Custom Cursor --> */}
+    const scrollToTop = () => {
+        window.scrollTo(0, 0);
+    };
 
-      {/* <!-- header-section start --> */}
-      <header
-        className={`header-section header-menu ${
-          headerFixed && "animated fadeInDown header-fixed"
-        }`}>
-        <nav className="navbar w-100 flex-nowrap   ps-xl-10 ps-xxl-10 navbar-expand-xl ">
+    const path = usePathname();
 
-          <Link
-            href="/"
-            className="navbar-brand d-none d-md-block ps-5  ms-xxl-15 d-flex align-items-center gap-2">
-            <Image
-              src={logo}
-              width={350}
-              height={90}
-              className="logo-text d-xxl-block  "
-              alt="logo-text"
-            />
-          </Link>
-          <Link
-              href="/"
-              className="navbar-brand d-md-none  ms-xxl-15 d-flex align-items-center gap-2">
-            <Image
-                src={logo}
-                width={200}
-                height={70}
-                className="logo-text  d-xxl-block  "
-                alt="logo-text"
-            />
-          </Link>
-          <div
-            className="collapse navbar-collapse d-flex gap-10 w-100 justify-content-end px-8 pe-2"
-            id="navbar-content">
-            {/*<div className="contact-info ms-xl-0 ms-xxl-5 d-none d-sm-flex align-items-center gap-2">*/}
-            {/*  <i className="material-symbols-outlined mat-icon"> smartphone </i>*/}
-            {/*  <span>(302) 555-0107</span>*/}
-            {/*</div>*/}
-            <ul className="navbar-nav d-xl-flex d-none gap-6 py-4 py-lg-0 m-auto pe-20 align-self-center">
-              <li className="dropdown show-dropdown">
-                <button
-                  type="button"
-                  aria-label="Navbar Dropdown Button"
-                  data-bs-toggle="dropdown"
-                  data-bs-auto-close="outside"
-                  onClick={() => console.log("first")}
-                  className={`dropdown-toggle dropdown-nav ${
-                    homepage ? "active" : ""
-                  }`}>
-                  Home
-                </button>
-                <ul className={`dropdown-menu`}>
-                  <li>
-                    <Link className="dropdown-item" href="/">
-                      Home One
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" href="/index-2">
-                      Home Two
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" href="/index-3">
-                      Home Three
-                    </Link>
-                  </li>
-                </ul>
-              </li>
-              <li className="dropdown show-dropdown">
-                <button
-                  type="button"
-                  aria-label="Navbar Dropdown Button"
-                  className={`dropdown-toggle dropdown-nav ${
-                    (path == "/game" || path == "/game-details") && "active"
-                  }`}>
-                  games
-                </button>
-                <ul className="dropdown-menu">
-                  <li>
-                    <Link className="dropdown-item" href="/game">
-                      games
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" href="/game-details">
-                      games Details
-                    </Link>
-                  </li>
-                </ul>
-              </li>
-              <li className="dropdown show-dropdown">
-                <button
-                  type="button"
-                  aria-label="Navbar Dropdown Button"
-                  className={`dropdown-toggle dropdown-nav ${
-                    ourServices && "active"
-                  }`}>
-                  Services
-                </button>
-                <ul className="dropdown-menu">
-                  <li>
-                    <Link className="dropdown-item" href="/our-services-1">
-                      services one
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" href="/our-services-2">
-                      services two
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" href="/our-services-3">
-                      services three
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      className="dropdown-item"
-                      href="/our-services-details">
-                      services Details
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      className="dropdown-item"
-                      href="/our-services-details-2">
-                      services Details Two
-                    </Link>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <Link
-                  className={`dropdown-nav ${path == "/about-us" && "active"}`}
-                  href="/about-us">
-                  About
-                </Link>
-              </li>
-              <li className={`dropdown show-dropdown`}>
-                <button
-                  type="button"
-                  aria-label="Navbar Dropdown Button"
-                  className={`dropdown-toggle dropdown-nav ${
-                    pages && "active"
-                  }`}>
-                  Pages
-                </button>
-                <ul className="dropdown-menu">
-                  <li>
-                    <Link className="dropdown-item" href="/pricing-plan">
-                      pricing plan
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" href="/store">
-                      Store
-                    </Link>
-                  </li>
-                  <li className="sub-dropdown">
+    // Helper function to check if current path matches nav item
+    const isActive = (navItem: NavItemProps | SubMenuItem): boolean => {
+        if (navItem.href && path === navItem.href) return true;
+        if (navItem.subItems) {
+            return navItem.subItems.some((subItem) => isActive(subItem));
+        }
+        return false;
+    };
+
+    // Render navigation items recursively
+    const renderNavItem = (
+        navItem: NavItemProps | SubMenuItem,
+        index: number,
+        isSubItem = false
+    ) => {
+        const hasSubItems = navItem.subItems && navItem.subItems.length > 0;
+        const active = isActive(navItem);
+
+        if (hasSubItems) {
+            return (
+                <li
+                    key={index}
+                    className={`dropdown show-dropdown ${isSubItem ? "sub-dropdown" : ""}`}
+                >
                     <button
-                      type="button"
-                      aria-label="Navbar Dropdown Button"
-                      className="dropdown-item dropdown-toggle">
-                      shop details
+                        type="button"
+                        aria-label="Navbar Dropdown Button"
+                        className={`dropdown-toggle ${
+                            isSubItem ? "dropdown-item" : "dropdown-nav"
+                        } ${active ? "active" : ""}`}
+                    >
+                        {navItem.label}
                     </button>
-                    <ul className="sub sub-menu dropend">
-                      <li>
-                        <Link className="dropdown-item" href="/shop-details-1">
-                          shop details one
-                        </Link>
-                      </li>
-                      <li>
-                        <Link className="dropdown-item" href="/shop-details-2">
-                          shop details two
-                        </Link>
-                      </li>
+                    <ul className={`${isSubItem ? "sub sub-menu dropend" : "dropdown-menu"}`}>
+                        {navItem.subItems!.map((subItem, subIndex) =>
+                            renderNavItem(subItem, subIndex, true)
+                        )}
                     </ul>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" href="/cart">
-                      Cart
+                </li>
+            );
+        }
+
+        if (isSubItem) {
+            return (
+                <li key={index}>
+                    <Link className="dropdown-item" href={navItem.href || "#"}>
+                        {navItem.label}
                     </Link>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" href="/checkout">
-                      checkout
-                    </Link>
-                  </li>
-                  <li className="sub-dropdown">
-                    <button
-                      type="button"
-                      aria-label="Navbar Dropdown Button"
-                      className="dropdown-item dropdown-toggle">
-                      career
-                    </button>
-                    <ul className="sub sub-menu dropend">
-                      <li>
-                        <Link className="dropdown-item" href="/career">
-                          career
-                        </Link>
-                      </li>
-                      <li>
-                        <Link className="dropdown-item" href="/career-details">
-                          career details
-                        </Link>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" href="/privacy-policy">
-                      privacy policy
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" href="/terms-conditions">
-                      terms conditions
-                    </Link>
-                  </li>
-                </ul>
-              </li>
-              <li className="dropdown show-dropdown">
-                <button
-                  type="button"
-                  aria-label="Navbar Dropdown Button"
-                  className={`dropdown-toggle dropdown-nav ${
-                    (path == "/blog" || path == "/blog-single") && "active"
-                  }`}>
-                  blog
-                </button>
-                <ul className="dropdown-menu">
-                  <li>
-                    <Link className="dropdown-item" href="/blog">
-                      blog
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" href="/blog-single">
-                      blog Details
-                    </Link>
-                  </li>
-                </ul>
-              </li>
-              <li>
+                </li>
+            );
+        }
+
+        return (
+            <li key={index}>
                 <Link
-                  className={`dropdown-item ${path == "/contact" && "active"}`}
-                  href="/contact">
-                  Contact
+                    className={`dropdown-nav ${active ? "active" : ""}`}
+                    href={navItem.href || "#"}
+                >
+                    {navItem.label}
                 </Link>
-              </li>
-            </ul>
-            <div className="right-area position-relative d-flex gap-3 gap-xxl-6 align-items-center">
-              {/*<div className={`single-item ${searchBox && "active"}`}>*/}
-              {/*  <div className="cmn-head">*/}
-              {/*    <div*/}
-              {/*      className="icon-area d-center position-relative"*/}
-              {/*      onClick={() => setSearchBox(!searchBox)}>*/}
-              {/*      <i className="material-symbols-outlined mat-icon fs-five">*/}
-              {/*        search*/}
-              {/*      </i>*/}
-              {/*    </div>*/}
-              {/*  </div>*/}
-              {/*  <div className="main-area p-5">*/}
-              {/*    <h5 className="mb-2">Search</h5>*/}
-              {/*    <form action="#">*/}
-              {/*      <div className="input-area mt-6 p-4 d-flex align-items-center">*/}
-              {/*        <input type="text" placeholder="Enter Your Email" />*/}
-              {/*        <div className="btn-area">*/}
-              {/*          <button className="box-style btn-box border-re py-1 p-2">*/}
-              {/*            Search*/}
-              {/*          </button>*/}
-              {/*        </div>*/}
-              {/*      </div>*/}
-              {/*    </form>*/}
-              {/*  </div>*/}
-              {/*</div>*/}
-              {/*<div className="single-item">*/}
-              {/*  <div className="cmn-head">*/}
-              {/*    <div className="icon-area d-center position-relative">*/}
-              {/*      <i className="material-symbols-outlined mat-icon fs-five">*/}
-              {/*        favorite*/}
-              {/*      </i>*/}
-              {/*    </div>*/}
-              {/*  </div>*/}
-              {/*</div>*/}
-              {/*<div className="single-item">*/}
-              {/*  <div className="cmn-head">*/}
-              {/*    <button*/}
-              {/*      type="button"*/}
-              {/*      className="icon-area d-center position-relative"*/}
-              {/*      data-bs-toggle="modal"*/}
-              {/*      data-bs-target="#loginMod">*/}
-              {/*      <i className="material-symbols-outlined mat-icon fs-five">*/}
-              {/*        person*/}
-              {/*      </i>*/}
-              {/*    </button>*/}
-              {/*  </div>*/}
-              {/*</div>*/}
-              {/*<div className={`single-item cart-area ${cart && "active"}`}>*/}
-              {/*  <div className="cmn-head">*/}
-              {/*    <button*/}
-              {/*      type="button"*/}
-              {/*      aria-label="Shopping Button"*/}
-              {/*      onClick={() => setCart(!cart)}*/}
-              {/*      className="icon-area d-center position-relative">*/}
-              {/*      <i className="material-symbols-outlined mat-icon fs-five">*/}
-              {/*        shopping_bag*/}
-              {/*      </i>*/}
-              {/*      <span className="position-absolute top-0 end-0 translate-middle badge rounded-pill bg-primary">*/}
-              {/*        {totolProducts}*/}
-              {/*        <span className="visually-hidden">unread messages</span>*/}
-              {/*      </span>*/}
-              {/*    </button>*/}
-              {/*  </div>*/}
-              {/*  <CartSidebar setCart={setCart} />*/}
-              {/*</div>*/}
-              <div
-                onClick={() => setSidebar(!sidebar)}
-                className="sidebar-close mobile-menu">
-                <button className="d-center d-grid d-xl-none">
-                  <i className="material-symbols-outlined mat-icon fs-four">
-                    {" "}
-                    menu_open{" "}
-                  </i>
-                  <span className="fs-six">MENU</span>
-                </button>
-              </div>
+            </li>
+        );
+    };
+
+    return (
+        <>
+            {/* Scroll To Top */}
+            <button
+                onClick={scrollToTop}
+                className={`scrollToTop d-none d-md-flex d-center ${scrolled && "active"}`}
+                aria-label="scroll Bar Button"
+            >
+                Back To Top
+            </button>
+
+            {/* Custom Cursor */}
+            <div className="mouse-follower">
+                <span className="cursor-outline"></span>
+                <span className="cursor-dot"></span>
             </div>
-          </div>
-        </nav>
-      </header>
-      {/* <!-- header-section end --> */}
 
-      {/* <!-- Login Registration start --> */}
-      <LoginModal />
-      {/* <!-- Login Registration end --> */}
+            {/* Header Section */}
+            <header
+                className={`header-section header-menu ${
+                    headerFixed && "animated fadeInDown header-fixed"
+                }`}
+            >
+                <nav className="navbar w-100 flex-nowrap ps-xl-6 ps-xxl-20 navbar-expand-xl">
+                    {/* Desktop Logo */}
+                    <Link
+                        href="/"
+                        className="navbar-brand d-none d-md-block px-xl-5 d-flex align-items-center gap-2"
+                    >
+                        <Image
+                            src={logo}
+                            width={350}
+                            height={90}
+                            className="logo-text d-xxl-block"
+                            alt="logo-text"
+                        />
+                    </Link>
 
-      {/* <!-- Sidebar Menu start --> */}
-      <Sidebar sidebar={sidebar} setSidebar={setSidebar} />
-    </>
-  );
+                    {/* Mobile Logo */}
+                    <Link
+                        href="/"
+                        className="navbar-brand d-md-none ms-xxl-15 d-flex align-items-center gap-2"
+                    >
+                        <Image
+                            src={logo}
+                            width={200}
+                            height={70}
+                            className="logo-text d-xxl-block"
+                            alt="logo-text"
+                        />
+                    </Link>
+
+                    <div
+                        className="collapse navbar-collapse d-flex gap-10 w-100 justify-content-end px-8 pe-2"
+                        id="navbar-content"
+                    >
+                        {/* Navigation Menu */}
+                        <ul className="navbar-nav d-xl-flex d-none gap-6 py-4 py-lg-0 m-auto pe-20 align-self-center">
+                            {NavItems.map((item, index) => renderNavItem(item, index))}
+                        </ul>
+
+                        {/* Right Area */}
+                        <div className="right-area position-relative d-flex gap-3 gap-xxl-6 align-items-center">
+                            {/* Mobile Menu Toggle */}
+                            <div className="sidebar-close mobile-menu">
+                                <button
+                                    onClick={() => setSidebar(!sidebar)}
+                                    className="d-center d-grid d-xl-none"
+                                    type="button"
+                                    aria-label="Toggle Mobile Menu"
+                                >
+                                    <i className="material-symbols-outlined mat-icon fs-four">
+                                        menu_open
+                                    </i>
+                                    <span className="fs-six">MENU</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Desktop Contact Button */}
+                    <div className="d-none d-xl-block px-xl-5">
+                        <PrimaryBtn text="Contact" href="/contact" />
+                    </div>
+                </nav>
+            </header>
+
+            {/* Login Modal */}
+            <LoginModal />
+        </>
+    );
 };
 
 export default Header;

@@ -18,7 +18,7 @@ const page = () => {
   return (
     <>
       {/* Header section start */}
-      <Header />
+      {/*<Header />*/}
       {/* Banner Section Start */}
       <Banner />
       {/* <!-- Banner-section end --> */}

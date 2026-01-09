@@ -12,7 +12,7 @@ const About = () => {
         <div className="row justify-content-between align-items-center">
           <div className="col-xxl-6 col-lg-6 order-1 order-lg-0">
             <div className="sec-img mw-100 position-relative d-center">
-              <Image src={aboutBlockBg} alt="sec-img" />
+              <Image width={636} height={664} src={'/images/home/office-env-image.webp'} alt="sec-img" />
               <div className="experience p-2 p-lg-4 position-absolute ">
                 <div className="experience-wrap p-3 px-lg-5 py-lg-8 d-inline-flex d-center gap-3">
                   <div className="counters d-center">

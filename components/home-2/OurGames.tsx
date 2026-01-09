@@ -11,12 +11,16 @@ import ModalVideo from "react-modal-video";
 import Image from "next/image";
 import { useState } from "react";
 import Link from "next/link";
+import {useRouter} from "next/dist/client/components/navigation";
+
 
 const OurGames = () => {
   const [isOpen, setOpen] = useState(false);
   const [active, setActive] = useState(1);
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
+  const router = useRouter();  // Initialize the useRouter hook
+
   const handleMouseMove = (e: any) => {
     setX(e.nativeEvent.offsetX);
     setY(e.nativeEvent.offsetY);
@@ -80,20 +84,24 @@ const OurGames = () => {
                   key={item.id}
                   className={`tabitem ${active == item.id && "active"}`}>
                   <div className="row cus-mar">
-                    {item.items.map((card) => (
-                      <div key={card.id} className="col-md-6">
+                    {item.items.map((game) => (
+                      <div key={game.id} className="col-md-6">
                         <div className="single-box">
                           <div className="position-relative d-center">
                             <span className="feature-tag start d-center position-absolute">
                               Feature
                             </span>
                             <Image
-                              src={card.img}
+                              src={game.img}
+                              width={636}
+                              height={354}
                               className="w-100 thumb-img"
                               alt="sec-img"
                             />
+
                             <span
-                              onClick={() => setOpen(true)}
+                              onClick={() => router.push(game.link)}
+
                               onMouseMove={handleMouseMove}
                               style={style}
                               className="box-style pointer btn-box-second heading-five fs-five mfp-iframe popupvideo text-uppercase d-center position-absolute">
@@ -103,20 +111,24 @@ const OurGames = () => {
                           <div className="info-area position-relative p-3 p-lg-5">
                             <div className="d-flex align-items-end gap-4 gap-sm-8">
                               <div className="img-area">
-                                <Image src={reviewImg1} alt="image" />
+                                <Image width={120} height={120} src={game.logo as string} alt="image" />
                               </div>
                               <div className="info-area">
                                 <Link href="game-details">
                                   <h3 className="visible-slowly-bottom mb-4">
-                                    Crazy Wild
+                                    {game.title}
                                   </h3>
                                 </Link>
                                 <ul className="d-flex flex-wrap fs-seven align-items-center gap-5 gap-md-10">
-                                  <li>Horror Adventure</li>
-                                  <li>Mobile</li>
-                                  <li>Action RPG</li>
-                                  <li>PC</li>
+                                  {
+                                    // Safe access to tags, using optional chaining and checking for the array
+                                      game?.tags?.length > 0 && game.tags.map((tag, index) => (
+                                          <li key={index}>{tag}</li>
+                                      ))
+                                  }
                                 </ul>
+
+
                               </div>
                             </div>
                             <div className="review-box mt-5 mt-md-8 mb-6 mb-md-10 w-100 p-2 p-sm-4 d-center gap-3 justify-content-between">
@@ -125,57 +137,57 @@ const OurGames = () => {
                                   <i className="material-symbols-outlined mat-icon">
                                     star
                                   </i>
-                                  <h4 className="fs-four">4.5</h4>
+                                  <h4 className="fs-four">{game.rating}</h4>
                                 </div>
-                                <p className="fs-seven">5.2M Reviews</p>
+                                <p className="fs-seven">{game.reviews}</p>
                               </div>
                               <div className="single-area d-grid d-sm-flex gap-2 align-items-center">
-                                <h4 className="fs-four mb-1">500M+</h4>
+                                <h4 className="fs-four mb-1">{game.downloads}</h4>
                                 <p className="fs-seven">Downloads</p>
                               </div>
                             </div>
-                            <div className="app-download d-flex gap-4 align-items-center">
-                              <Link
-                                href="https://www.apple.com/app-store/"
-                                className="w-100">
-                                <Image
-                                  src={appStore}
-                                  className="w-100"
-                                  alt="Image"
-                                />
-                              </Link>
-                              <Link
-                                href="https://play.google.com/"
-                                className="w-100">
-                                <Image
-                                  src={googlePlay}
-                                  className="w-100"
-                                  alt="Image"
-                                />
-                              </Link>
-                              <Link
-                                href="https://www.amazon.com/"
-                                className="w-100">
-                                <Image
-                                  src={amazon}
-                                  className="w-100"
-                                  alt="Image"
-                                />
-                              </Link>
-                            </div>
+                            {/*<div className="app-download d-flex gap-4 align-items-center">*/}
+                            {/*  <Link*/}
+                            {/*    href="https://www.apple.com/app-store/"*/}
+                            {/*    className="w-100">*/}
+                            {/*    <Image*/}
+                            {/*      src={appStore}*/}
+                            {/*      className="w-100"*/}
+                            {/*      alt="Image"*/}
+                            {/*    />*/}
+                            {/*  </Link>*/}
+                            {/*  <Link*/}
+                            {/*    href="https://play.google.com/"*/}
+                            {/*    className="w-100">*/}
+                            {/*    <Image*/}
+                            {/*      src={googlePlay}*/}
+                            {/*      className="w-100"*/}
+                            {/*      alt="Image"*/}
+                            {/*    />*/}
+                            {/*  </Link>*/}
+                            {/*  <Link*/}
+                            {/*    href="https://www.amazon.com/"*/}
+                            {/*    className="w-100">*/}
+                            {/*    <Image*/}
+                            {/*      src={amazon}*/}
+                            {/*      className="w-100"*/}
+                            {/*      alt="Image"*/}
+                            {/*    />*/}
+                            {/*  </Link>*/}
+                            {/*</div>*/}
                           </div>
                         </div>
                       </div>
                     ))}
                   </div>
-                  <div className="text-center mt-10 mt-sm-15">
-                    <div className="loading py-3 px-8 d-inline-flex align-items-center gap-2">
-                      <div className="icon-box d-center">
-                        <i className="material-symbols-outlined"> pending </i>
-                      </div>
-                      <span>Loading</span>
-                    </div>
-                  </div>
+                  {/*<div className="text-center mt-10 mt-sm-15">*/}
+                  {/*  <div className="loading py-3 px-8 d-inline-flex align-items-center gap-2">*/}
+                  {/*    <div className="icon-box d-center">*/}
+                  {/*      <i className="material-symbols-outlined"> pending </i>*/}
+                  {/*    </div>*/}
+                  {/*    <span>Loading</span>*/}
+                  {/*  </div>*/}
+                  {/*</div>*/}
                 </div>
               ))}
             </div>
