@@ -54,43 +54,43 @@ export const gameTabHome2 = [
       }
     ],
   },
-  {
-    id: 2,
-    icon: <i className="ri-apple-line fs-two"></i>,
-    items: [
-      {
-        id: 4,
-        img: gameImg4,
-        title: "Chess Cham",
-        rating: 4.5,
-        downloads: 500,
-        logo:'/',
-        link:'/'
-
-      },
-      {
-        id: 1,
-        img: gameImg1,
-        title: "Crazy Wild",
-        rating: 4.5,
-        downloads: 500,
-      },
-      {
-        id: 2,
-        img: gameImg2,
-        title: "Shadow Quest",
-        rating: 4.5,
-        downloads: 500,
-      },
-      {
-        id: 3,
-        img: gameImg3,
-        title: "Galactic Escape",
-        rating: 4.5,
-        downloads: 500,
-      },
-    ],
-  },
+  // {
+  //   id: 2,
+  //   icon: <i className="ri-apple-line fs-two"></i>,
+  //   items: [
+  //     {
+  //       id: 4,
+  //       img: gameImg4,
+  //       title: "Chess Cham",
+  //       rating: 4.5,
+  //       downloads: 500,
+  //       logo:'/',
+  //       link:'/'
+  //
+  //     },
+  //     {
+  //       id: 1,
+  //       img: gameImg1,
+  //       title: "Crazy Wild",
+  //       rating: 4.5,
+  //       downloads: 500,
+  //     },
+  //     {
+  //       id: 2,
+  //       img: gameImg2,
+  //       title: "Shadow Quest",
+  //       rating: 4.5,
+  //       downloads: 500,
+  //     },
+  //     {
+  //       id: 3,
+  //       img: gameImg3,
+  //       title: "Galactic Escape",
+  //       rating: 4.5,
+  //       downloads: 500,
+  //     },
+  //   ],
+  // },
   // {
   //   id: 4,
   //   icon: <i className="ri-amazon-line fs-two"></i>,

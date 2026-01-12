@@ -100,7 +100,7 @@ const OurGames = () => {
                             />
 
                             <span
-                              onClick={() => router.push(game.link)}
+                              onClick={() => router.push(game.link as string | '#')}
 
                               onMouseMove={handleMouseMove}
                               style={style}
@@ -122,7 +122,7 @@ const OurGames = () => {
                                 <ul className="d-flex flex-wrap fs-seven align-items-center gap-5 gap-md-10">
                                   {
                                     // Safe access to tags, using optional chaining and checking for the array
-                                      game?.tags?.length > 0 && game.tags.map((tag, index) => (
+                                    game?.tags &&    game?.tags?.length > 0 && game.tags.map((tag:string, index:number) => (
                                           <li key={index}>{tag}</li>
                                       ))
                                   }
